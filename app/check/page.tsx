@@ -35,7 +35,7 @@ export default function Check() {
         <br />
         <Link
           className='link-button'
-          href={{pathname: '/result',query: appRequest.current.toQuery()}}>
+          href={{pathname: '/result', query: appRequest.current.toQuery()}}>
           次に進む
         </Link>
       </div>

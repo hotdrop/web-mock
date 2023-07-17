@@ -9,8 +9,8 @@ class AppRequest {
   appDate: string;
   // 時刻 6桁
   appTime: string;
-  // 1か9のみのパターン
-  appPattern: string; // パターン
+  // 1か9のみ許容
+  appPattern: string;
 
   // 分割する前の元のリクエストパラメータ
   originalParamStr: string;
@@ -54,7 +54,7 @@ class AppRequest {
 
   toQuery() {
     return {
-      appRequest: this.toBody(),
+      [AppRequest.paramName]: this.toBody(),
     }
   }
 
