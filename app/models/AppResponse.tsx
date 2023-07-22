@@ -6,9 +6,9 @@ class AppResponse {
   // レスポンスコード。固定値
   private responseCode: string = '12345';
   // Requestと同じ値
-  private appCode: string;
+  appCode: string;
   // Requestと同じ値
-  private multiByteText: string;
+  multiByteText: string;
   // 返却時の日時
   private dateTimeStr: string;
   // 返却時のステータス
@@ -33,7 +33,7 @@ class AppResponse {
 
   toShowString(): string {
     const str = this.toStringQuery();
-    return str + "\n" + `[レスポンス長=${str.length}]`
+    return str + "\n\n" + `レスポンス長=${str.length}`
   }
 
   private toStringQuery(): string {
@@ -55,9 +55,9 @@ class AppResponse {
     const monthNum = now.getMonth() + 1;
     const month = this.padForNum(monthNum.toString(), 2);
     const day = this.padForNum(now.getDay().toString(), 2);
-    const hour = this.padForNum(now.getHours.toString(), 2);
-    const minutes = this.padForNum(now.getMinutes.toString(), 2);
-    const second = this.padForNum(now.getSeconds.toString(), 2);
+    const hour = this.padForNum(now.getHours().toString(), 2);
+    const minutes = this.padForNum(now.getMinutes().toString(), 2);
+    const second = this.padForNum(now.getSeconds().toString(), 2);
 
     return `${year}${month}${day}${hour}${minutes}${second}`;
   }

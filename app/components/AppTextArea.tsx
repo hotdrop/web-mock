@@ -2,7 +2,7 @@ import React from "react";
 
 type AppTextAreaProps = {
   title: string;
-  label: string,
+  label: string;
 }
 
 export const AppTextArea: React.FC<AppTextAreaProps> = ({ title, label }) => {

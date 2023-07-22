@@ -1,10 +1,13 @@
+'use client'
+
 import { useSearchParams } from "next/navigation";
-import AppRequest from "../models/AppRequest";
 import { useEffect, useState } from "react";
 import AppResponse from "../models/AppResponse";
 import ResponseStatusEnum from "../models/ResponseStatusEnum";
+import AppRequest from "../models/AppRequest";
 import { AppDivider } from "../components/AppDivider";
 import { AppTextArea } from "../components/AppTextArea";
+import { AppTextField } from "../components/AppTextField";
 
 export default function Result() {
   const searchParams = useSearchParams();
@@ -35,17 +38,17 @@ export default function Result() {
       </p>
       <div className="text-center m-4">
         <button
-          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'success' ? 'gb-green-400 text-white' : 'bg-white text-black'}`}
+          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'success' ? 'bg-green-400 text-white' : 'bg-white text-black'}`}
           onClick={() => setTab('success')} >
             成功
         </button>
         <button
-          className={`px-6 py-2 border border-gray-200 ${tab === 'error' ? 'gb-red-400 text-white' : 'bg-white text-black'}`}
+          className={`px-6 py-2 border border-gray-200 ${tab === 'error' ? 'bg-red-400 text-white' : 'bg-white text-black'}`}
           onClick={() => setTab('error')} >
             エラー
         </button>
         <button
-          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'suspend' ? 'gb-gray-400 text-white' : 'bg-white text-black'}`}
+          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'suspend' ? 'bg-gray-400 text-white' : 'bg-white text-black'}`}
           onClick={() => setTab('suspend')} >
             中断
         </button>
@@ -53,15 +56,12 @@ export default function Result() {
       <AppDivider />
       {tab === 'success' && (
         <div>
-          <p className="font-bold pt-4">レスポンスを編集する</p>
-          <p className="pt-4 break-wrods">
-            [POST先のURL]<br />
-            {postUrl}
-          </p>
-          <p className="pt-4">アプリコード</p>
-          // TODO 入力
-          <p className="pt-4">マルチバイト文字</p>
-          // TODO 入力
+          <p className="font-bold pt-4 pb-4">レスポンスを編集する</p>
+          <AppTextField label="POST先のURL" initValue={postUrl} />
+          <br />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} />
+          <br />
+          <AppTextField label="テストネーム" initValue={`${appResponse.multiByteText}`} />
         </div>
       )}
       {tab === 'error' && (
@@ -70,8 +70,6 @@ export default function Result() {
       {tab === 'suspend' && (
         <div></div>
       )}
-      <br />
-      <AppDivider />
       <br />
       <AppTextArea title="レスポンスのパラメータ" label={`${appResponse.toShowString() || ''}`} />
       <br />
