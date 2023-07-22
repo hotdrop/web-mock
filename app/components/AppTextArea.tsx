@@ -8,7 +8,7 @@ type AppTextAreaProps = {
 export const AppTextArea: React.FC<AppTextAreaProps> = ({ title, label }) => {
   return (
     <textarea 
-      className="border-2 border-black w-full pl-4 pr-4" 
+      className="border-2 rounded-lg w-full pl-4 pr-4" 
       value={`[${title}]\n${label || ''}`}
       readOnly
       rows={6} 

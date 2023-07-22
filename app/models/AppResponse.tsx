@@ -1,4 +1,3 @@
-import { assert } from "console";
 import AppRequest from "./AppRequest";
 import ResponseStatusEnum from "./ResponseStatusEnum";
 
@@ -8,7 +7,7 @@ class AppResponse {
   // Requestと同じ値
   appCode: string;
   // Requestと同じ値
-  multiByteText: string;
+  appName: string;
   // 返却時の日時
   private dateTimeStr: string;
   // 返却時のステータス
@@ -21,12 +20,12 @@ class AppResponse {
   constructor(
     appRequest?: AppRequest, 
     appCode?: string, 
-    multiByteText?: string, 
+    appName?: string, 
     dateTimeStr?: string,
     status: ResponseStatusEnum = ResponseStatusEnum.Success
   ) {
     this.appCode = appCode ?? appRequest!.appCode;
-    this.multiByteText = multiByteText ?? appRequest!.multiByteText;
+    this.appName = appName ?? appRequest!.appName;
     this.dateTimeStr = dateTimeStr ?? this.getNowDateTimeString();
     this.status =status ?? ResponseStatusEnum.Success;
   }
@@ -39,7 +38,7 @@ class AppResponse {
   private toStringQuery(): string {
     // ここでレスポンスの文字列を生成する
     const concatStr1 = this.responseCode + this.appCode;
-    const concatStr2 = this.padForChar(this.multiByteText, 15);
+    const concatStr2 = this.padForChar(this.appName, 15);
     const concatStr3 = this.dateTimeStr + this.status;
     return concatStr1 + concatStr2 + concatStr3;
   }
@@ -78,15 +77,15 @@ class AppResponse {
     return str.padEnd(length, ' ');
   }
 
-  copyWith({appCode, multiByteText, status} : {
+  copyWith({appCode, appName: multiByteText, status} : {
     appCode?: string;
-    multiByteText?: string;
+    appName?: string;
     status?: ResponseStatusEnum
   }) {
     return new AppResponse(
       undefined,
       appCode ?? this.appCode,
-      multiByteText ?? this.multiByteText,
+      multiByteText ?? this.appName,
       this.dateTimeStr,
       status ?? this.status
     );

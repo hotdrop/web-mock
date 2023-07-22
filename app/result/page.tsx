@@ -38,7 +38,7 @@ export default function Result() {
       </p>
       <div className="text-center m-4">
         <button
-          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'success' ? 'bg-green-400 text-white' : 'bg-white text-black'}`}
+          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'success' ? 'bg-blue-400 text-white' : 'bg-white text-black'}`}
           onClick={() => setTab('success')} >
             成功
         </button>
@@ -48,7 +48,7 @@ export default function Result() {
             エラー
         </button>
         <button
-          className={`px-6 py-2 border border-gray-200 rounded-l-lg ${tab === 'suspend' ? 'bg-gray-400 text-white' : 'bg-white text-black'}`}
+          className={`px-6 py-2 border border-gray-200 rounded-r-lg ${tab === 'suspend' ? 'bg-gray-400 text-white' : 'bg-white text-black'}`}
           onClick={() => setTab('suspend')} >
             中断
         </button>
@@ -56,19 +56,33 @@ export default function Result() {
       <AppDivider />
       {tab === 'success' && (
         <div>
-          <p className="font-bold pt-4 pb-4">レスポンスを編集する</p>
-          <AppTextField label="POST先のURL" initValue={postUrl} />
+          <p className="font-bold pt-4 pb-4 text-blue-700">レスポンスを編集する</p>
+          <AppTextField label="POST先のURL" initValue={postUrl} color="blue"/>
           <br />
-          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="blue" />
           <br />
-          <AppTextField label="テストネーム" initValue={`${appResponse.multiByteText}`} />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="blue" />
         </div>
       )}
       {tab === 'error' && (
-        <div></div>
+        <div>
+          <p className="font-bold pt-4 pb-4 text-red-700">レスポンスを編集する</p>
+          <AppTextField label="POST先のURL" initValue={postUrl} color="red" />
+          <br />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="red" />
+          <br />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="red" />
+        </div>
       )}
       {tab === 'suspend' && (
-        <div></div>
+        <div>
+          <p className="font-bold pt-4 pb-4 text-gray-400">レスポンスを編集する</p>
+          <AppTextField label="POST先のURL" initValue={postUrl} color="gray" />
+          <br />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="gray" />
+          <br />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="gray" />
+        </div>
       )}
       <br />
       <AppTextArea title="レスポンスのパラメータ" label={`${appResponse.toShowString() || ''}`} />

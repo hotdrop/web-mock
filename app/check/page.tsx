@@ -17,14 +17,13 @@ export default function Check() {
     <main className="flex flex-col min-h-screen m-4">
       <div>
         <p className="text-2xl text-center">パラメータチェック</p>
-        <p className="text-sm">※本チェックでエラーになった場合、画面にその旨表示します。</p>
+        <p className="text-sm text-center pb-4">※本チェックでエラーになった場合、画面にその旨表示します。</p>
         <AppTextArea title="リクエストパラメータ" label={`${appRequest.current.originalParamStr || ''}`} />
       </div>
       <p>{appRequest.current.overviewMessage}</p>
-      <AppDivider />
       <div className="py-2">
-        <ParamCheckItem label="アプリコード" checkResult={appRequest.current.checkAppCode()} />
-        <ParamCheckItem label="テキスト" checkResult={appRequest.current.checkMultiByte()} />
+        <ParamCheckItem label="テストコード" checkResult={appRequest.current.checkAppCode()} />
+        <ParamCheckItem label="テストネーム" checkResult={appRequest.current.checkAppName()} />
         <ParamCheckItem label="番号" checkResult={appRequest.current.checkAppNumber()} />
         <ParamCheckItem label="年月日" checkResult={appRequest.current.checkAppDate()} />
         <ParamCheckItem label="時刻" checkResult={appRequest.current.checkAppTime()} />

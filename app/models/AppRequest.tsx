@@ -2,7 +2,7 @@ class AppRequest {
   // 英数字 10桁
   appCode: string;
   // 全角 15文字
-  multiByteText: string; 
+  appName: string; 
   // 数字のみ 5桁
   appNumber: string; 
   // 年月日 8桁
@@ -36,7 +36,7 @@ class AppRequest {
       this.originalParamStr = argParam;
       this.overviewMessage = `受信したパラメータ長が正しくありません。パラメータ長=${argParam.length}`;
       this.appCode = '';
-      this.multiByteText = '';
+      this.appName = '';
       this.appNumber = '';
       this.appDate = '';
       this.appTime = '';
@@ -45,7 +45,7 @@ class AppRequest {
     }
 
     this.appCode = param.substring(0, 10);
-    this.multiByteText = param.substring(10, 25);
+    this.appName = param.substring(10, 25);
     this.appNumber = param.substring(25, 30);
     this.appDate = param.substring(30, 38);
     this.appTime = param.substring(38, 44);
@@ -66,8 +66,8 @@ class AppRequest {
     }
   }
 
-  checkMultiByte(): [boolean, string] {
-    // ここもしSJISのカナをチェックするのであれば工夫が必要
+  checkAppName(): [boolean, string] {
+    // TODO ここSJISのカナをチェックするのであれば工夫が必要
     return [true, 'チェックOK(全角カナで全角スペース埋め)']
   }
 
@@ -114,7 +114,7 @@ class AppRequest {
   }
 
   private toBody(): string {
-    return this.appCode + this.multiByteText + this.appNumber + this.appDate + this.appTime + this.appPattern;
+    return this.appCode + this.appName + this.appNumber + this.appDate + this.appTime + this.appPattern;
   }
 
   private isAlphaNumeric(str: string): boolean {
