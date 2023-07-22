@@ -1,9 +1,10 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 
 type AppTextFieldProps = {
   label: string;
   initValue: string;
   color: 'blue' | 'red' | 'gray';
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const colorClasses = {
@@ -12,7 +13,7 @@ const colorClasses = {
   gray: { text: 'text-gray-400', border: 'border-gray-400' },
 }
 
-export const AppTextField: React.FC<AppTextFieldProps> = ({ label, initValue, color }) => {
+export const AppTextField: React.FC<AppTextFieldProps> = ({ label, initValue, color, onChange }) => {
   const { text: textColor, border: borderColor} = colorClasses[color] || colorClasses.gray;
 
   return (
@@ -23,6 +24,7 @@ export const AppTextField: React.FC<AppTextFieldProps> = ({ label, initValue, co
       <input 
         className={`px-3 py-2 text-gray-700 border ${borderColor} rounded-lg focus:outline-none focus:ring-2`} 
         value={initValue}
+        onChange={onChange}
       />
     </div>
   );

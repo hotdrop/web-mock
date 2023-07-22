@@ -35,6 +35,10 @@ class AppResponse {
     return str + "\n\n" + `レスポンス長=${str.length}`
   }
 
+  toParamString(): string {
+    return this.toStringQuery();
+  }
+
   private toStringQuery(): string {
     // ここでレスポンスの文字列を生成する
     const concatStr1 = this.responseCode + this.appCode;

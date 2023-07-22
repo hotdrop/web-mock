@@ -1,13 +1,14 @@
 'use client'
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppResponse from "../models/AppResponse";
 import ResponseStatusEnum from "../models/ResponseStatusEnum";
 import AppRequest from "../models/AppRequest";
 import { AppDivider } from "../components/AppDivider";
 import { AppTextArea } from "../components/AppTextArea";
 import { AppTextField } from "../components/AppTextField";
+import { PostButton } from "../components/PostButton";
 
 export default function Result() {
   const searchParams = useSearchParams();
@@ -18,8 +19,19 @@ export default function Result() {
   const [tab, setTab] = useState('success');
   const [postUrl, setPostUrl] = useState(AppResponse.successPostUrl);
 
-  // TODO アプリコード入力のハンドラ
-  // TODO マルチバイト入力のハンドラ
+  const handleInputPostUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPostUrl(event.target.value);
+  }
+
+  const handleInputAppCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newRes = appResponse.copyWith({appCode: event.target.value});
+    setAppResponse(newRes);
+  }
+
+  const handleInputAppNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newRes = appResponse.copyWith({appName: event.target.value});
+    setAppResponse(newRes);
+  }
 
   useEffect(() => {
     const [newPostUrl, newStatus] = (tab === 'success') ? 
@@ -57,37 +69,39 @@ export default function Result() {
       {tab === 'success' && (
         <div>
           <p className="font-bold pt-4 pb-4 text-blue-700">レスポンスを編集する</p>
-          <AppTextField label="POST先のURL" initValue={postUrl} color="blue"/>
+          <AppTextField label="POST先のURL" initValue={postUrl} color="blue" onChange={handleInputPostUrlChange}/>
           <br />
-          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="blue" />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="blue" onChange={handleInputAppCodeChange} />
           <br />
-          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="blue" />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="blue" onChange={handleInputAppNameChange} />
         </div>
       )}
       {tab === 'error' && (
         <div>
           <p className="font-bold pt-4 pb-4 text-red-700">レスポンスを編集する</p>
-          <AppTextField label="POST先のURL" initValue={postUrl} color="red" />
+          <AppTextField label="POST先のURL" initValue={postUrl} color="red" onChange={handleInputPostUrlChange} />
           <br />
-          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="red" />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="red" onChange={handleInputAppCodeChange} />
           <br />
-          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="red" />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="red" onChange={handleInputAppNameChange}/>
         </div>
       )}
       {tab === 'suspend' && (
         <div>
           <p className="font-bold pt-4 pb-4 text-gray-400">レスポンスを編集する</p>
-          <AppTextField label="POST先のURL" initValue={postUrl} color="gray" />
+          <AppTextField label="POST先のURL" initValue={postUrl} color="gray" onChange={handleInputPostUrlChange} />
           <br />
-          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="gray" />
+          <AppTextField label="テストコード" initValue={`${appResponse.appCode}`} color="gray" onChange={handleInputAppCodeChange}/>
           <br />
-          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="gray" />
+          <AppTextField label="テストネーム" initValue={`${appResponse.appName}`} color="gray" onChange={handleInputAppNameChange} />
         </div>
       )}
       <br />
       <AppTextArea title="レスポンスのパラメータ" label={`${appResponse.toShowString() || ''}`} />
       <br />
-      // TODO 終了ボタン
+      <div className="text-center">
+        <PostButton label="終了する" postUrl={postUrl} paramStr={appResponse.toParamString()} />
+      </div>
     </main>
   );
 }
