@@ -8,13 +8,13 @@ type AppTextFieldProps = {
 }
 
 const colorClasses = {
-  blue: { text: 'text-blue-700', border: 'border-blue-400' },
-  red: { text: 'text-red-700', border: 'border-red-400' },
-  gray: { text: 'text-gray-400', border: 'border-gray-400' },
+  blue: { textColor: 'text-blue-700', borderColor: 'border-blue-400' },
+  red: { textColor: 'text-red-700', borderColor: 'border-red-400' },
+  gray: { textColor: 'text-gray-400', borderColor: 'border-gray-400' },
 }
 
 export const AppTextField: React.FC<AppTextFieldProps> = ({ label, initValue, color, onChange }) => {
-  const { text: textColor, border: borderColor} = colorClasses[color] || colorClasses.gray;
+  const { textColor, borderColor} = colorClasses[color] || colorClasses.gray;
 
   return (
     <div className="flex flex-col">
