@@ -1,5 +1,5 @@
 # Web-Site-Mock
-Next.jsの学習用に作成したWebサイト  
+Next.jsの学習用に作成したモックWebサイト  
 
 # コマンドメモ
 ```bash
